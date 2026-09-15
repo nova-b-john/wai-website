@@ -54,6 +54,49 @@
     <main id="main">
       <section class="hero" id="top">
         <div class="hero-bg" aria-hidden="true"></div>
+        <div class="wai-hero-anim" aria-hidden="true">
+          <svg class="wai-hero-anim-svg" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMax slice" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+              <linearGradient id="wai-flow-mask" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fff" stop-opacity="0" />
+                <stop offset="28%" stop-color="#fff" stop-opacity="0.12" />
+                <stop offset="46%" stop-color="#fff" stop-opacity="1" />
+              </linearGradient>
+              <mask id="wai-flow-top-mask">
+                <rect width="1200" height="720" fill="url(#wai-flow-mask)" />
+              </mask>
+            </defs>
+            <path
+              id="wai-flow-path"
+              d="M-80 390 C 160 510, 300 580, 480 500 S 560 360, 600 455 C 650 575, 840 620, 1000 530 S 1160 400, 1280 470"
+              fill="none"
+              stroke="none"
+            />
+            <g mask="url(#wai-flow-top-mask)">
+              <text class="wai-flow-text wai-flow-in">
+                <textPath href="#wai-flow-path" xlink:href="#wai-flow-path" startOffset="0%">Can you check today’s customer enquiries? · Can you check today’s customer enquiries? · Can you check today’s customer enquiries?</textPath>
+              </text>
+              <text class="wai-flow-text wai-flow-out">
+                <textPath href="#wai-flow-path" xlink:href="#wai-flow-path" startOffset="48%">Done. 6 enquiries need follow-up.</textPath>
+              </text>
+            </g>
+          </svg>
+          <div class="wai-core">
+            <span class="wai-core-ring"></span>
+            <div class="wai-wave" data-state="listen">
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+            </div>
+            <div class="wai-acts">
+              <span class="wai-act" data-act="a">18 new enquiries</span>
+              <span class="wai-act" data-act="b">6 high priority</span>
+            </div>
+            <div class="wai-motes">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+        </div>
         <div class="container hero-inner">
           <div class="hero-copy">
             <h1>
@@ -483,5 +526,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="hero-animation.js"></script>
   </body>
 </html>

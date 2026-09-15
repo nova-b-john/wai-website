@@ -363,6 +363,8 @@ h3 {
 }
 
 .hero-copy {
+  position: relative;
+  z-index: 4;
   max-width: 52rem;
   margin-inline: auto;
 }
@@ -437,7 +439,7 @@ h3 {
 
 .hero-chip {
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   min-width: 10.4rem;
   padding: 0.85rem 0.95rem;
   border-radius: 1.1rem;
@@ -1146,6 +1148,200 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   50% { height: 100%; }
 }
 
+.wai-hero-anim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wai-hero-anim-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wai-flow-text {
+  font-family: var(--font);
+  font-size: 21px;
+  font-weight: 500;
+  fill: rgba(17, 17, 17, 0.46);
+}
+
+.wai-flow-out {
+  fill: rgba(17, 17, 17, 0.72);
+  opacity: 0;
+}
+
+.wai-core {
+  position: absolute;
+  left: 50%;
+  top: 64%;
+  width: 7.1rem;
+  height: 2.35rem;
+  translate: -50% -50%;
+}
+
+.wai-core-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+  transform: scale(0.72);
+  transition: opacity 0.8s var(--ease), transform 1.1s var(--ease);
+}
+
+.wai-hero-anim[data-state="think"] .wai-core-ring,
+.wai-hero-anim[data-state="act"] .wai-core-ring {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.8s var(--ease), transform 1.1s var(--ease);
+}
+
+.wai-hero-anim[data-state="listen"] .wai-core-ring,
+.wai-hero-anim[data-state="respond"] .wai-core-ring {
+  transition: opacity 0.7s var(--ease), transform 0.9s var(--ease);
+}
+
+.wai-wave {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.22rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.42rem 0.7rem;
+  border: 1px solid rgba(17, 17, 17, 0.88);
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.9);
+  transform-origin: center;
+  transition: transform 0.9s var(--ease), opacity 0.6s ease;
+}
+
+.wai-hero-anim[data-state="think"] .wai-wave {
+  transform: scale(0.72);
+}
+
+.wai-wave span {
+  display: block;
+  width: 0.16rem;
+  height: 28%;
+  border-radius: 99px;
+  background: #f4f1e8;
+  transform-origin: center;
+}
+
+.wai-acts {
+  position: absolute;
+  left: calc(100% + 0.85rem);
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.28rem;
+  translate: 0 -50%;
+  white-space: nowrap;
+}
+
+.wai-act {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.wai-hero-anim[data-state="act"] .wai-act[data-act="a"],
+.wai-hero-anim[data-state="act"] .wai-act[data-act="b"].is-on {
+  opacity: 0.78;
+  transform: none;
+}
+
+.wai-motes {
+  position: absolute;
+  inset: -2.4rem;
+  pointer-events: none;
+}
+
+.wai-motes i {
+  position: absolute;
+  width: 0.28rem;
+  height: 0.28rem;
+  border-radius: 50%;
+  background: rgba(17, 17, 17, 0.28);
+  opacity: 0;
+  left: 50%;
+  top: 50%;
+}
+
+.wai-hero-anim[data-state="think"] .wai-motes i {
+  animation: wai-mote 1.8s var(--ease) infinite;
+}
+
+.wai-motes i:nth-child(1) { --dx: -2.1rem; --dy: -1.4rem; animation-delay: 0s; }
+.wai-motes i:nth-child(2) { --dx: 1.8rem; --dy: -1.6rem; animation-delay: 0.12s; }
+.wai-motes i:nth-child(3) { --dx: -2.4rem; --dy: 0.8rem; animation-delay: 0.24s; }
+.wai-motes i:nth-child(4) { --dx: 2.3rem; --dy: 0.6rem; animation-delay: 0.08s; }
+.wai-motes i:nth-child(5) { --dx: -0.4rem; --dy: -2.2rem; animation-delay: 0.2s; }
+.wai-motes i:nth-child(6) { --dx: 0.6rem; --dy: 2rem; animation-delay: 0.32s; }
+
+@keyframes wai-mote {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.7);
+  }
+  28% { opacity: 0.55; }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.15);
+  }
+}
+
+@media (max-width: 979px) {
+  .wai-flow-text {
+    font-size: 15px;
+  }
+
+  .wai-core {
+    top: 68%;
+    width: 6.2rem;
+    height: 2.1rem;
+  }
+}
+
+@media (max-width: 719px) {
+  .wai-hero-anim-svg {
+    transform: scale(0.92);
+    transform-origin: 50% 72%;
+  }
+
+  .wai-flow-text {
+    font-size: 13px;
+  }
+
+  .wai-core {
+    top: 74%;
+    width: 5.4rem;
+    height: 1.85rem;
+  }
+
+  .wai-acts {
+    display: none;
+  }
+}
+
 @media (min-width: 720px) {
   .btn-nav {
     display: inline-flex;
@@ -1306,7 +1502,13 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   .wave span,
   .wave-lg span,
   .cta-glow,
-  .marquee-track {
+  .marquee-track,
+  .wai-core-ring,
+  .wai-motes i {
     animation: none;
+  }
+
+  .wai-hero-anim {
+    display: none;
   }
 }

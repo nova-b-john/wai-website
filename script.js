@@ -208,43 +208,54 @@ function setCapability(id, { animate = true } = {}) {
 function initCapabilities() {
   const tabs = [...document.querySelectorAll(".capability-tab")];
   const stage = document.querySelector(".capability-stage");
+  const pin = document.querySelector(".capability-pin");
   const panel = document.getElementById("cap-panel");
   if (!tabs.length || !stage || !panel) return;
 
   panel.dataset.cap = "01";
   let ticking = false;
+  let index = 0;
+  let timer;
+  let paused = false;
+  let inView = false;
+  let lastScrollAt = 0;
 
   const desktop = () => window.matchMedia("(min-width: 980px)").matches;
 
-  const probeY = () => {
+  const navPx = () => {
     const styles = getComputedStyle(document.documentElement);
     const nav = parseFloat(styles.getPropertyValue("--nav-h")) || 4.4;
     const fs = parseFloat(styles.fontSize) || 16;
-    return nav * fs + 150;
+    return nav * fs;
   };
 
   const activateFromScroll = () => {
-    if (!desktop()) return;
+    if (!desktop() || !pin) return;
 
-    const stageRect = stage.getBoundingClientRect();
-    if (stageRect.bottom < 80 || stageRect.top > window.innerHeight - 40) return;
+    const pinRect = pin.getBoundingClientRect();
+    const start = navPx();
+    const travel = Math.max(1, pin.offsetHeight - (window.innerHeight - start));
+    const progress = Math.min(0.999, Math.max(0, (start - pinRect.top) / travel));
+    const next = Math.min(tabs.length - 1, Math.floor(progress * tabs.length));
+    index = next;
+    setCapability(tabs[next].dataset.cap, { animate: false });
+  };
 
-    const probe = probeY();
-    let next = tabs[0];
-    let best = Infinity;
-    tabs.forEach((tab) => {
-      const rect = tab.getBoundingClientRect();
-      const dist = Math.abs(rect.top + rect.height / 2 - probe);
-      if (dist < best) {
-        best = dist;
-        next = tab;
-      }
-    });
+  const stop = () => window.clearInterval(timer);
 
-    setCapability(next.dataset.cap);
+  const play = () => {
+    if (paused || !inView || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    stop();
+    timer = window.setInterval(() => {
+      if (paused || !inView) return;
+      if (performance.now() - lastScrollAt < 1600) return;
+      index = (index + 1) % tabs.length;
+      setCapability(tabs[index].dataset.cap);
+    }, 3800);
   };
 
   const onScroll = () => {
+    lastScrollAt = performance.now();
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
@@ -257,23 +268,39 @@ function initCapabilities() {
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
+  document.addEventListener("scroll", onScroll, { passive: true, capture: true });
   window.addEventListener("resize", activateFromScroll);
 
-  const io = new IntersectionObserver(() => activateFromScroll(), {
-    root: null,
-    rootMargin: "-10% 0px -40% 0px",
-    threshold: [0, 0.2, 0.4, 0.6, 0.8, 1],
-  });
-  tabs.forEach((tab) => io.observe(tab));
-  document.addEventListener("scroll", onScroll, { passive: true, capture: true });
+  const io = new IntersectionObserver(
+    ([entry]) => {
+      inView = Boolean(entry && entry.isIntersecting);
+      if (inView) play();
+      else stop();
+    },
+    { threshold: 0.2 }
+  );
+  io.observe(stage);
+
   activateFromScroll();
 
-  tabs.forEach((tab) => {
+  tabs.forEach((tab, i) => {
     tab.addEventListener("click", () => {
+      index = i;
+      paused = true;
+      stop();
       setCapability(tab.dataset.cap);
-      if (desktop()) {
-        const top = window.scrollY + tab.getBoundingClientRect().top - probeY();
-        window.scrollTo({ top, behavior: "smooth" });
+      if (desktop() && pin) {
+        const start = navPx();
+        const travel = Math.max(1, pin.offsetHeight - (window.innerHeight - start));
+        const pinY = pin.getBoundingClientRect().top + window.scrollY;
+        const top = pinY - start + ((i + 0.08) / tabs.length) * travel;
+        const html = document.documentElement;
+        const prev = html.style.scrollBehavior;
+        html.style.scrollBehavior = "auto";
+        html.scrollTop = top;
+        html.style.scrollBehavior = prev;
+        lastScrollAt = performance.now();
+        activateFromScroll();
       }
     });
     tab.addEventListener("keydown", (event) => {
@@ -287,6 +314,24 @@ function initCapabilities() {
         tabs[(current - 1 + tabs.length) % tabs.length].focus();
       }
     });
+  });
+
+  stage.addEventListener("mouseenter", () => {
+    paused = true;
+    stop();
+  });
+  stage.addEventListener("mouseleave", () => {
+    paused = false;
+    play();
+  });
+  stage.addEventListener("focusin", () => {
+    paused = true;
+    stop();
+  });
+  stage.addEventListener("focusout", (event) => {
+    if (stage.contains(event.relatedTarget)) return;
+    paused = false;
+    play();
   });
 }
 

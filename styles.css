@@ -37,6 +37,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  overflow-y: auto;
   color-scheme: light;
 }
 
@@ -620,6 +621,10 @@ h3 {
   box-shadow: 0 0 0 4px rgba(47, 107, 255, 0.12);
 }
 
+.capability-pin {
+  height: auto;
+}
+
 .capability-stage {
   display: grid;
   gap: 1rem;
@@ -874,15 +879,6 @@ h3 {
   display: block;
   width: 1.22rem;
   height: 1.22rem;
-}
-
-.eco-icon-whatsapp,
-.eco-icon-sheets,
-.eco-icon-zoho,
-.eco-icon-salesforce,
-.eco-icon-hubspot {
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--border);
 }
 
 .eco-caption {
@@ -1532,15 +1528,25 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
     right: 0;
   }
 
+  .capability-pin {
+    height: 560vh;
+  }
+
   .capability-stage {
     grid-template-columns: 1.05fr 0.95fr;
     gap: 1.25rem;
-    align-items: start;
+    align-items: center;
+    position: sticky;
+    top: var(--nav-h);
+    min-height: calc(100dvh - var(--nav-h));
+    padding-block: 1.25rem 2rem;
+    background: var(--bg);
+    z-index: 2;
   }
 
   .capability-panel {
-    position: sticky;
-    top: calc(var(--nav-h) + 1rem);
+    position: relative;
+    top: auto;
   }
 
   .eco-grid {

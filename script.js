@@ -174,6 +174,8 @@ function setCapability(id, { animate = true } = {}) {
   const data = capabilities[id];
   const panel = document.getElementById("cap-panel");
   if (!data || !panel) return;
+  if (panel.dataset.cap === id) return;
+  panel.dataset.cap = id;
 
   const apply = () => {
     panel.setAttribute("aria-labelledby", `tab-${id}`);
@@ -191,6 +193,8 @@ function setCapability(id, { animate = true } = {}) {
     tab.setAttribute("aria-selected", String(active));
   });
 
+  window.clearTimeout(setCapability.timer);
+
   if (!animate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     apply();
     return;
@@ -198,65 +202,92 @@ function setCapability(id, { animate = true } = {}) {
 
   panel.classList.add("is-leaving");
   panel.classList.remove("is-in");
-  window.setTimeout(apply, 180);
+  setCapability.timer = window.setTimeout(apply, 180);
 }
 
 function initCapabilities() {
-  const tabs = document.querySelectorAll(".capability-tab");
-  if (!tabs.length) return;
+  const tabs = [...document.querySelectorAll(".capability-tab")];
+  const stage = document.querySelector(".capability-stage");
+  const panel = document.getElementById("cap-panel");
+  if (!tabs.length || !stage || !panel) return;
 
-  let index = 0;
-  let timer;
-  let paused = false;
+  panel.dataset.cap = "01";
+  let ticking = false;
 
-  const play = () => {
-    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    timer = window.setInterval(() => {
-      index = (index + 1) % tabs.length;
-      setCapability(tabs[index].dataset.cap);
-    }, 4200);
+  const desktop = () => window.matchMedia("(min-width: 980px)").matches;
+
+  const probeY = () => {
+    const styles = getComputedStyle(document.documentElement);
+    const nav = parseFloat(styles.getPropertyValue("--nav-h")) || 4.4;
+    const fs = parseFloat(styles.fontSize) || 16;
+    return nav * fs + 150;
   };
 
-  const stop = () => {
-    window.clearInterval(timer);
+  const activateFromScroll = () => {
+    if (!desktop()) return;
+
+    const stageRect = stage.getBoundingClientRect();
+    if (stageRect.bottom < 80 || stageRect.top > window.innerHeight - 40) return;
+
+    const probe = probeY();
+    let next = tabs[0];
+    let best = Infinity;
+    tabs.forEach((tab) => {
+      const rect = tab.getBoundingClientRect();
+      const dist = Math.abs(rect.top + rect.height / 2 - probe);
+      if (dist < best) {
+        best = dist;
+        next = tab;
+      }
+    });
+
+    setCapability(next.dataset.cap);
   };
 
-  tabs.forEach((tab, i) => {
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      try {
+        activateFromScroll();
+      } finally {
+        ticking = false;
+      }
+    });
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", activateFromScroll);
+
+  const io = new IntersectionObserver(() => activateFromScroll(), {
+    root: null,
+    rootMargin: "-10% 0px -40% 0px",
+    threshold: [0, 0.2, 0.4, 0.6, 0.8, 1],
+  });
+  tabs.forEach((tab) => io.observe(tab));
+  document.addEventListener("scroll", onScroll, { passive: true, capture: true });
+  activateFromScroll();
+
+  tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      index = i;
-      paused = true;
-      stop();
       setCapability(tab.dataset.cap);
+      if (desktop()) {
+        const top = window.scrollY + tab.getBoundingClientRect().top - probeY();
+        window.scrollTo({ top, behavior: "smooth" });
+      }
     });
     tab.addEventListener("keydown", (event) => {
-      const list = [...tabs];
-      const current = list.indexOf(tab);
+      const current = tabs.indexOf(tab);
       if (event.key === "ArrowDown" || event.key === "ArrowRight") {
         event.preventDefault();
-        list[(current + 1) % list.length].focus();
+        tabs[(current + 1) % tabs.length].focus();
       }
       if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
         event.preventDefault();
-        list[(current - 1 + list.length) % list.length].focus();
+        tabs[(current - 1 + tabs.length) % tabs.length].focus();
       }
     });
   });
-
-  const stage = document.querySelector(".capability-stage");
-  stage?.addEventListener("mouseenter", () => {
-    paused = true;
-    stop();
-  });
-  stage?.addEventListener("mouseleave", () => {
-    paused = false;
-    play();
-  });
-  stage?.addEventListener("focusin", () => {
-    paused = true;
-    stop();
-  });
-
-  play();
 }
 
 function initHero() {

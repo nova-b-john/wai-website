@@ -370,6 +370,10 @@ h3 {
   margin-inline: auto;
 }
 
+.hero-copy h1 {
+  margin-inline: 0;
+}
+
 .hero-line {
   display: block;
 }
@@ -1454,16 +1458,39 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
     padding: 5rem 0 2.5rem;
   }
 
+  .hero-inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+    align-items: center;
+    justify-items: stretch;
+    gap: 1.5rem 2.25rem;
+    text-align: left;
+  }
+
+  .hero-copy {
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .hero-desc {
+    margin: 1.2rem 0 0;
+  }
+
+  .hero-actions {
+    margin: 1.85rem 0 0;
+  }
+
   .hero-visual {
     width: min(100%, 42rem);
+    margin: 0;
+    justify-self: end;
   }
 
   .hero-chip-a {
-    left: -5.25rem;
+    left: 0;
   }
 
   .hero-chip-b {
-    right: -5.25rem;
+    right: 0;
   }
 
   .capability-stage {

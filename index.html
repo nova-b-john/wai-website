@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WAI — Woodenclouds AI</title>
+    <meta
+      name="description"
+      content="An AI that answers calls in English and Malayalam, like a helpful teammate."
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="logo" href="#top" aria-label="WAI home">
+          <img class="logo-img" src="assets/wai-logo.png" alt="" />
+        </a>
+
+        <nav class="nav" id="site-nav" aria-label="Primary">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#integrations">Integrations</a>
+          <a class="nav-cta" href="mailto:hello@woodenclouds.com?subject=Contact%20Us">
+            Contact Us
+          </a>
+        </nav>
+
+        <a class="btn btn-nav" href="mailto:hello@woodenclouds.com?subject=Contact%20Us">
+          Contact Us
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1>
+              <span class="hero-line">Smarter Conversations.</span>
+              <span class="hero-line italic">Better Business.</span>
+            </h1>
+            <p class="hero-desc hero-fade">
+              An AI that answers calls in English and Malayalam,<br />
+              like a helpful teammate.
+            </p>
+            <div class="hero-actions hero-fade">
+              <a class="btn btn-primary" href="mailto:hello@woodenclouds.com?subject=Book%20a%20free%20WAI%20demo">
+                Book a free demo
+              </a>
+              <a class="btn btn-secondary" href="#pricing">See pricing</a>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-glow" aria-hidden="true"></div>
+            <div class="hero-ring" aria-hidden="true"></div>
+            <img
+              class="hero-robot"
+              src="assets/wai-robot.png"
+              width="700"
+              height="700"
+              alt="WAI 3D robot wearing headphones and a microphone, waving"
+            />
+
+            <aside class="hero-chip hero-chip-a">
+              <p class="chip-kicker">INBOUND</p>
+              <p class="chip-title">Reception · Malayalam</p>
+              <div class="wave" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </aside>
+            <aside class="hero-chip hero-chip-b">
+              <p class="chip-kicker">LATENCY</p>
+              <p class="chip-stat">&lt; 500ms</p>
+              <p class="chip-kicker">INDIA HOSTED</p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="WAI strengths">
+        <div class="marquee">
+          <ul class="marquee-track">
+            <li><span class="trust-dot" aria-hidden="true"></span>Human-like conversations</li>
+            <li><span class="trust-dot" aria-hidden="true"></span>Powered by advanced AI</li>
+            <li><span class="trust-dot" aria-hidden="true"></span>Low latency (&lt;500ms)</li>
+            <li><span class="trust-dot" aria-hidden="true"></span>100% Indian infrastructure</li>
+            <li><span class="trust-dot" aria-hidden="true"></span>English &amp; Malayalam</li>
+            <li aria-hidden="true"><span class="trust-dot"></span>Human-like conversations</li>
+            <li aria-hidden="true"><span class="trust-dot"></span>Powered by advanced AI</li>
+            <li aria-hidden="true"><span class="trust-dot"></span>Low latency (&lt;500ms)</li>
+            <li aria-hidden="true"><span class="trust-dot"></span>100% Indian infrastructure</li>
+            <li aria-hidden="true"><span class="trust-dot"></span>English &amp; Malayalam</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="product">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">WHAT WAI DOES</p>
+            <h2>Your 24/7 AI employee <em>for calls.</em></h2>
+            <p class="section-desc">
+              Your 24/7 AI employee for calls, sales, and customer support. Handle sales, support, reception, and appointments with natural voice — then hand off to a person when it matters.
+            </p>
+          </header>
+
+          <div class="capability-stage reveal">
+            <div class="capability-tabs" role="tablist" aria-label="WAI capabilities">
+              <button class="capability-tab is-active" role="tab" aria-selected="true" aria-controls="cap-panel" id="tab-01" data-cap="01">
+                <span class="cap-num">01</span>
+                <span>
+                  <span class="cap-title">Inbound &amp; outbound calls</span>
+                  <span class="cap-body">Answer and place calls around the clock with a consistent voice.</span>
+                </span>
+              </button>
+              <button class="capability-tab" role="tab" aria-selected="false" aria-controls="cap-panel" id="tab-02" data-cap="02">
+                <span class="cap-num">02</span>
+                <span>
+                  <span class="cap-title">Call recording &amp; downloads</span>
+                  <span class="cap-body">Keep every conversation for training, QA, and compliance.</span>
+                </span>
+              </button>
+              <button class="capability-tab" role="tab" aria-selected="false" aria-controls="cap-panel" id="tab-03" data-cap="03">
+                <span class="cap-num">03</span>
+                <span>
+                  <span class="cap-title">Live transcripts</span>
+                  <span class="cap-body">See what was said in real time — useful for coaching and handoffs.</span>
+                </span>
+              </button>
+              <button class="capability-tab" role="tab" aria-selected="false" aria-controls="cap-panel" id="tab-04" data-cap="04">
+                <span class="cap-num">04</span>
+                <span>
+                  <span class="cap-title">Analytics dashboard</span>
+                  <span class="cap-body">Volume, outcomes, and trends in one place your team can act on.</span>
+                </span>
+              </button>
+              <button class="capability-tab" role="tab" aria-selected="false" aria-controls="cap-panel" id="tab-05" data-cap="05">
+                <span class="cap-num">05</span>
+                <span>
+                  <span class="cap-title">Knowledge base</span>
+                  <span class="cap-body">Ground answers in your products, policies, and FAQs.</span>
+                </span>
+              </button>
+              <button class="capability-tab" role="tab" aria-selected="false" aria-controls="cap-panel" id="tab-06" data-cap="06">
+                <span class="cap-num">06</span>
+                <span>
+                  <span class="cap-title">Human transfer</span>
+                  <span class="cap-body">Escalate to a person when the caller needs a specialist.</span>
+                </span>
+              </button>
+              <button class="capability-tab" role="tab" aria-selected="false" aria-controls="cap-panel" id="tab-07" data-cap="07">
+                <span class="cap-num">07</span>
+                <span>
+                  <span class="cap-title">English &amp; Malayalam</span>
+                  <span class="cap-body">Speak the languages your customers already use.</span>
+                </span>
+              </button>
+              <button class="capability-tab" role="tab" aria-selected="false" aria-controls="cap-panel" id="tab-08" data-cap="08">
+                <span class="cap-num">08</span>
+                <span>
+                  <span class="cap-title">Secure cloud</span>
+                  <span class="cap-body">Hosted on Indian infrastructure with careful access defaults.</span>
+                </span>
+              </button>
+            </div>
+
+            <div class="capability-panel is-in" id="cap-panel" role="tabpanel" aria-labelledby="tab-01">
+              <p class="eyebrow panel-eyebrow">01</p>
+              <h3 class="panel-title">Inbound &amp; outbound calls</h3>
+              <p class="panel-body">Answer and place calls around the clock with a consistent voice.</p>
+              <div class="panel-visual" data-visual="01" aria-hidden="true">
+                <div class="mock mock-call">
+                  <div class="mock-top">
+                    <span class="mock-dot"></span>
+                    Incoming · Malayalam
+                  </div>
+                  <p class="mock-name">Reception line</p>
+                  <p class="mock-sub">Answered in &lt; 500ms</p>
+                  <div class="wave wave-lg">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="features">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">ONE AI, TWO JOBS</p>
+            <h2>An AI employee for your customers — <em>and for you.</em></h2>
+          </header>
+
+          <div class="two-jobs">
+            <article class="job-card reveal">
+              <h3>Customer-facing AI employee</h3>
+              <ul>
+                <li>Answers inbound calls</li>
+                <li>Handles enquiries</li>
+                <li>Handles sales</li>
+                <li>Handles customer support</li>
+                <li>Handles appointments</li>
+              </ul>
+            </article>
+            <article class="job-card reveal">
+              <h3>Business-facing AI employee</h3>
+              <p class="job-lead">
+                Business owner can interact with WAI directly to ask about company information · tasks · accounts · HR · CRM
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="integrations">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">ECOSYSTEM</p>
+            <h2>Works with the tools you already <em>run your business on.</em></h2>
+          </header>
+
+          <ul class="eco-grid reveal">
+            <li class="eco-tile"><span>CR</span>CRM</li>
+            <li class="eco-tile"><span>WA</span>WhatsApp</li>
+            <li class="eco-tile"><span>WEB</span>Website</li>
+            <li class="eco-tile"><span>APP</span>Mobile app</li>
+            <li class="eco-tile"><span>CAL</span>Calendar</li>
+            <li class="eco-tile"><span>API</span>APIs</li>
+            <li class="eco-tile"><span>ERP</span>ERP</li>
+            <li class="eco-tile"><span>GS</span>Google Sheets</li>
+            <li class="eco-tile"><span>ZO</span>Zoho</li>
+            <li class="eco-tile"><span>SF</span>Salesforce</li>
+            <li class="eco-tile"><span>HB</span>HubSpot</li>
+            <li class="eco-tile"><span>WQ</span>WoQuick</li>
+          </ul>
+          <p class="eco-caption reveal">Integration availability varies by plan and setup.</p>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="pricing">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">PRICING</p>
+            <h2>Transparent. <em>Pay only for what you use.</em></h2>
+            <p class="section-desc">
+              Voice setup, chat assistant, platform, and usage. No prepaid packs. No hidden fees.
+            </p>
+          </header>
+
+          <div class="pricing-grid">
+            <article class="price-card reveal">
+              <span class="price-tag">One-time</span>
+              <h3>AI Agent Setup</h3>
+              <p class="price-amount">₹15,000 <span>one-time</span></p>
+              <ul>
+                <li>Agent configuration</li>
+                <li>Prompt engineering</li>
+                <li>Knowledge base setup</li>
+                <li>CRM / API integration</li>
+                <li>Phone number setup</li>
+                <li>Testing &amp; deployment</li>
+              </ul>
+              <p class="price-note">Additional agent setup is charged extra per agent.</p>
+            </article>
+
+            <article class="price-card reveal">
+              <span class="price-tag">Recurring</span>
+              <h3>Platform + Number</h3>
+              <p class="price-amount">₹1,700<span>/month</span></p>
+              <ul>
+                <li>Dashboard &amp; analytics</li>
+                <li>Call recording</li>
+                <li>Live transcripts</li>
+                <li>AI updates</li>
+                <li>Priority support</li>
+                <li>1 local Indian number</li>
+              </ul>
+              <p class="price-note">Additional numbers are charged extra per number/month.</p>
+            </article>
+
+            <article class="price-card reveal">
+              <span class="price-tag">One-time</span>
+              <h3>AI Chat Assistant</h3>
+              <p class="price-amount">₹10,000 <span>one-time</span></p>
+              <ul>
+                <li>Chat agent setup</li>
+                <li>Prompt engineering</li>
+                <li>Knowledge base</li>
+                <li>Site/app integration</li>
+                <li>Multi-language</li>
+                <li>Testing &amp; deployment</li>
+              </ul>
+              <p class="price-note">Monthly AI usage is pay as you go.</p>
+            </article>
+
+            <article class="price-card reveal">
+              <span class="price-tag">Usage</span>
+              <h3>AI Usage</h3>
+              <p class="price-amount">Pay as you go</p>
+              <ul>
+                <li>Voice calling minutes</li>
+                <li>Chat AI usage</li>
+                <li>No lock-in</li>
+                <li>No wasted packs</li>
+                <li>Volume discounts</li>
+                <li>Transparent billing</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="rates reveal">
+            <h3>AI Calling Rates</h3>
+            <div class="table-wrap">
+              <table>
+                <caption class="sr-only">AI calling rates by monthly minute volume</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Minutes</th>
+                    <th scope="col">Rate</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Best for</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0–500 mins</td>
+                    <td>₹3.50/min</td>
+                    <td>Base rate</td>
+                    <td>Low to moderate volume</td>
+                  </tr>
+                  <tr>
+                    <td>501–1,500 mins</td>
+                    <td>₹3.25/min</td>
+                    <td>~7% off</td>
+                    <td>Growing sales teams</td>
+                  </tr>
+                  <tr>
+                    <td>1,500+ mins</td>
+                    <td>₹3.00/min</td>
+                    <td>~14% off</td>
+                    <td>High-volume desks</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="rates-note">
+              Rates are per minute, billed per second with a 60-second minimum. Prices exclude GST.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="scale">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">WHY BUSINESSES CHOOSE WAI</p>
+            <h2>Built to scale <em>with you.</em></h2>
+          </header>
+          <ul class="reason-grid">
+            <li class="reason-card reveal">
+              <h3>No prepaid packs</h3>
+              <p>Pay only for the minutes and chat you actually use.</p>
+            </li>
+            <li class="reason-card reveal">
+              <h3>Lower rates at scale</h3>
+              <p>Higher usage unlocks better per-minute pricing.</p>
+            </li>
+            <li class="reason-card reveal">
+              <h3>Scale anytime</h3>
+              <p>From a hundred minutes to a hundred thousand.</p>
+            </li>
+            <li class="reason-card reveal">
+              <h3>No hidden costs</h3>
+              <p>Setup, platform, and usage — priced in the open.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="why-wai">
+        <div class="container">
+          <header class="section-head reveal">
+            <p class="eyebrow">WHY WAI</p>
+            <h2>Built for how Indian businesses <em>actually work.</em></h2>
+          </header>
+          <ul class="diff-grid reveal">
+            <li>Malayalam + English</li>
+            <li>Indian infrastructure</li>
+            <li>Indian phone numbers</li>
+            <li>Low latency</li>
+            <li>Custom knowledge base</li>
+            <li>Human handoff</li>
+            <li>Local business support</li>
+            <li>Custom AI agent configuration</li>
+            <li>Voice + chat</li>
+            <li>Integration with business systems</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section cta-band" id="cta">
+        <div class="container cta-inner reveal">
+          <div class="cta-copy">
+            <p class="eyebrow">SMART. NATURAL. RELIABLE.</p>
+            <h2>Ready for <em>smarter conversations?</em></h2>
+            <p class="section-desc">
+              Book a demo and hear Woodenclouds AI take a real call for your business.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="mailto:hello@woodenclouds.com?subject=Book%20a%20free%20WAI%20demo">
+                Book a free demo
+              </a>
+              <a class="btn btn-secondary" href="tel:+918921708606">Call us</a>
+            </div>
+          </div>
+          <div class="cta-visual" aria-hidden="true">
+            <div class="cta-glow"></div>
+            <img src="assets/wai-robot.png" width="280" height="280" alt="" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="#top" aria-label="WAI home">
+            <span class="logo-mark" aria-hidden="true">W</span>
+            <span class="logo-lockup">
+              <span class="logo-name">WAI</span>
+              <span class="logo-sub">WOODENCLOUDS AI</span>
+            </span>
+          </a>
+          <p>An AI that answers calls in English and Malayalam, like a helpful teammate.</p>
+        </div>
+
+        <nav aria-label="Product">
+          <h2>Product</h2>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#integrations">Integrations</a>
+        </nav>
+
+        <nav aria-label="Company">
+          <h2>Company</h2>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </nav>
+
+        <nav aria-label="Legal">
+          <h2>Legal</h2>
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+        </nav>
+      </div>
+      <div class="container footer-base">
+        <p>© 2026 Woodenclouds. WAI is a product of Woodenclouds AI.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

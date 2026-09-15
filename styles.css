@@ -158,13 +158,15 @@ h3 {
 }
 
 #product .section-head,
-#features .section-head {
+#features .section-head,
+#integrations .section-head {
   text-align: center;
 }
 
 #product .section-head h2,
 #product .section-desc,
-#features .section-head h2 {
+#features .section-head h2,
+#integrations .section-head h2 {
   margin-inline: auto;
 }
 

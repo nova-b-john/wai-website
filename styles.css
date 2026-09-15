@@ -157,12 +157,14 @@ h3 {
   margin-bottom: var(--space-7);
 }
 
-#product .section-head {
+#product .section-head,
+#features .section-head {
   text-align: center;
 }
 
 #product .section-head h2,
-#product .section-desc {
+#product .section-desc,
+#features .section-head h2 {
   margin-inline: auto;
 }
 
@@ -1260,16 +1262,6 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   padding: 0.62rem 1.15rem;
   border-radius: 999px;
   background: rgba(17, 17, 17, 0.92);
-  transform-origin: center;
-  transition: transform 0.95s var(--ease), opacity 0.6s ease;
-}
-
-.hero-visual[data-state="think"] .wai-wave {
-  transform: scale(0.72);
-}
-
-.hero-visual[data-state="respond"] .wai-wave {
-  transform: scale(1.08);
 }
 
 .wai-wave span {

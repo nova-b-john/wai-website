@@ -485,7 +485,8 @@ h3 {
 .hero-chip-a {
   left: auto;
   right: -3.25rem;
-  top: 16%;
+  top: -0.65rem;
+  width: max-content;
   animation: float-card 7s ease-in-out infinite;
 }
 
@@ -1504,6 +1505,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   .hero-chip-a {
     left: auto;
     right: 0;
+    top: -0.85rem;
   }
 
   .hero-chip-b {
@@ -1559,8 +1561,9 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .hero-chip-a {
-    left: calc(50% + 8.5rem);
-    right: auto;
+    left: auto;
+    right: -2.75rem;
+    top: -1.1rem;
   }
 
   .hero-chip-b {

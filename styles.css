@@ -465,14 +465,14 @@ h3 {
 }
 
 .hero-chip-a {
-  left: 0;
-  top: 14%;
+  left: -3.25rem;
+  top: 16%;
   animation: float-card 7s ease-in-out infinite;
 }
 
 .hero-chip-b {
-  right: 0;
-  bottom: 8%;
+  right: -3.25rem;
+  bottom: 10%;
   animation: float-card 8s ease-in-out infinite reverse;
 }
 
@@ -1456,6 +1456,14 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
 
   .hero-visual {
     width: min(100%, 42rem);
+  }
+
+  .hero-chip-a {
+    left: -5.25rem;
+  }
+
+  .hero-chip-b {
+    right: -5.25rem;
   }
 
   .capability-stage {

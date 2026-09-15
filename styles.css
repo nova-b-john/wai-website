@@ -1214,7 +1214,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   left: 50%;
   top: 50%;
   z-index: 1;
-  width: 34rem;
+  width: 22.5rem;
   height: 7.2rem;
   translate: -50% -50%;
   overflow: visible;
@@ -1397,7 +1397,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
 
 @media (max-width: 979px) {
   .wai-flow-svg {
-    width: 28rem;
+    width: 20rem;
     height: 6.2rem;
   }
 
@@ -1417,7 +1417,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
 
 @media (max-width: 719px) {
   .wai-flow-svg {
-    width: 24rem;
+    width: 18rem;
     height: 5.6rem;
   }
 
@@ -1495,10 +1495,11 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .hero-inner {
+    width: min(100% - 2rem, 80rem);
     grid-template-columns: minmax(0, 1fr) minmax(22rem, 1.05fr);
     align-items: center;
     justify-items: stretch;
-    gap: 1.5rem 6.5rem;
+    gap: 1.5rem 3.25rem;
     text-align: left;
   }
 
@@ -1603,7 +1604,8 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
 
 @media (min-width: 1200px) {
   .hero-inner {
-    gap: 1.5rem 8.25rem;
+    width: min(100% - 2.5rem, 82rem);
+    gap: 1.5rem 3.75rem;
   }
 
   .hero-chip-a {

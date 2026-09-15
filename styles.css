@@ -168,6 +168,10 @@ h3 {
   margin-inline: auto;
 }
 
+#features .section-head h2 {
+  max-width: 46ch;
+}
+
 .section-desc {
   margin: 1.1rem 0 0;
   max-width: 38rem;

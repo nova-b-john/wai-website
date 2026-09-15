@@ -1223,7 +1223,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
 
 .wai-flow-text {
   font-family: var(--font);
-  font-size: 27px;
+  font-size: 32px;
   font-weight: 500;
   fill: rgba(17, 17, 17, 0.52);
 }
@@ -1402,7 +1402,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .wai-flow-text {
-    font-size: 22px;
+    font-size: 25px;
   }
 
   .wai-avatar {
@@ -1422,7 +1422,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .wai-flow-text {
-    font-size: 18px;
+    font-size: 21px;
   }
 
   .wai-avatar {

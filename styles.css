@@ -161,6 +161,7 @@ h3 {
   text-align: center;
 }
 
+#product .section-head h2,
 #product .section-desc {
   margin-inline: auto;
 }

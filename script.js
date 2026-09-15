@@ -206,133 +206,26 @@ function setCapability(id, { animate = true } = {}) {
 }
 
 function initCapabilities() {
-  const tabs = [...document.querySelectorAll(".capability-tab")];
-  const stage = document.querySelector(".capability-stage");
-  const pin = document.querySelector(".capability-pin");
-  const panel = document.getElementById("cap-panel");
-  if (!tabs.length || !stage || !panel) return;
+  const cards = [...document.querySelectorAll(".cap-card")];
+  if (!cards.length) return;
 
-  panel.dataset.cap = "01";
-  let ticking = false;
-  let index = 0;
-  let timer;
-  let paused = false;
-  let inView = false;
-  let lastScrollAt = 0;
-
-  const desktop = () => window.matchMedia("(min-width: 980px)").matches;
-
-  const navPx = () => {
-    const styles = getComputedStyle(document.documentElement);
-    const nav = parseFloat(styles.getPropertyValue("--nav-h")) || 4.4;
-    const fs = parseFloat(styles.fontSize) || 16;
-    return nav * fs;
-  };
-
-  const activateFromScroll = () => {
-    if (!desktop() || !pin) return;
-
-    const pinRect = pin.getBoundingClientRect();
-    const start = navPx();
-    const travel = Math.max(1, pin.offsetHeight - (window.innerHeight - start));
-    const progress = Math.min(0.999, Math.max(0, (start - pinRect.top) / travel));
-    const next = Math.min(tabs.length - 1, Math.floor(progress * tabs.length));
-    index = next;
-    setCapability(tabs[next].dataset.cap, { animate: false });
-  };
-
-  const stop = () => window.clearInterval(timer);
-
-  const play = () => {
-    if (paused || !inView || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    stop();
-    timer = window.setInterval(() => {
-      if (paused || !inView) return;
-      if (performance.now() - lastScrollAt < 1600) return;
-      index = (index + 1) % tabs.length;
-      setCapability(tabs[index].dataset.cap);
-    }, 3800);
-  };
-
-  const onScroll = () => {
-    lastScrollAt = performance.now();
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      try {
-        activateFromScroll();
-      } finally {
-        ticking = false;
-      }
-    });
-  };
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  document.addEventListener("scroll", onScroll, { passive: true, capture: true });
-  window.addEventListener("resize", activateFromScroll);
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    cards.forEach((card) => card.classList.add("is-in"));
+    return;
+  }
 
   const io = new IntersectionObserver(
-    ([entry]) => {
-      inView = Boolean(entry && entry.isIntersecting);
-      if (inView) play();
-      else stop();
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      });
     },
-    { threshold: 0.2 }
+    { threshold: 0.28, rootMargin: "0px 0px -12% 0px" }
   );
-  io.observe(stage);
 
-  activateFromScroll();
-
-  tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => {
-      index = i;
-      paused = true;
-      stop();
-      setCapability(tab.dataset.cap);
-      if (desktop() && pin) {
-        const start = navPx();
-        const travel = Math.max(1, pin.offsetHeight - (window.innerHeight - start));
-        const pinY = pin.getBoundingClientRect().top + window.scrollY;
-        const top = pinY - start + ((i + 0.08) / tabs.length) * travel;
-        const html = document.documentElement;
-        const prev = html.style.scrollBehavior;
-        html.style.scrollBehavior = "auto";
-        html.scrollTop = top;
-        html.style.scrollBehavior = prev;
-        lastScrollAt = performance.now();
-        activateFromScroll();
-      }
-    });
-    tab.addEventListener("keydown", (event) => {
-      const current = tabs.indexOf(tab);
-      if (event.key === "ArrowDown" || event.key === "ArrowRight") {
-        event.preventDefault();
-        tabs[(current + 1) % tabs.length].focus();
-      }
-      if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
-        event.preventDefault();
-        tabs[(current - 1 + tabs.length) % tabs.length].focus();
-      }
-    });
-  });
-
-  stage.addEventListener("mouseenter", () => {
-    paused = true;
-    stop();
-  });
-  stage.addEventListener("mouseleave", () => {
-    paused = false;
-    play();
-  });
-  stage.addEventListener("focusin", () => {
-    paused = true;
-    stop();
-  });
-  stage.addEventListener("focusout", (event) => {
-    if (stage.contains(event.relatedTarget)) return;
-    paused = false;
-    play();
-  });
+  cards.forEach((card) => io.observe(card));
 }
 
 function initHero() {

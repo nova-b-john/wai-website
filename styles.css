@@ -158,14 +158,11 @@ h3 {
   margin-bottom: var(--space-7);
 }
 
-#product .section-head,
 #features .section-head,
 #integrations .section-head {
   text-align: center;
 }
 
-#product .section-head h2,
-#product .section-desc,
 #features .section-head h2,
 #integrations .section-head h2 {
   margin-inline: auto;
@@ -571,6 +568,105 @@ h3 {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 4px rgba(47, 107, 255, 0.12);
+}
+
+.product-split {
+  display: grid;
+  background: var(--bg);
+}
+
+.product-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding: 3.2rem 1.5rem 3.4rem;
+}
+
+.product-left h2 {
+  max-width: 11ch;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 0.98;
+}
+
+.product-left-foot {
+  display: grid;
+  gap: 1.4rem;
+  max-width: 34rem;
+}
+
+.product-left-foot p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.product-left-foot .btn {
+  width: max-content;
+}
+
+.product-right {
+  display: grid;
+  background: #171717;
+  padding: 2.4rem 1.35rem 3.2rem;
+}
+
+.cap-card {
+  display: grid;
+  gap: 1.35rem;
+  padding: 2.4rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateX(3.25rem);
+  transition: opacity 0.7s var(--ease), transform 0.85s var(--ease);
+}
+
+.cap-card:first-child {
+  padding-top: 0.4rem;
+}
+
+.cap-card:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.cap-card.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.cap-card-copy .cap-num {
+  margin: 0 0 0.55rem;
+}
+
+.cap-card-copy h3 {
+  max-width: 12ch;
+  color: #fff;
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.cap-card-copy p {
+  margin: 0.7rem 0 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.cap-card .panel-eyebrow,
+.cap-card .panel-title,
+.cap-card .panel-body {
+  display: none;
+}
+
+.cap-card .capability-panel {
+  min-height: 0;
+  padding: 1.15rem 1.15rem 1.25rem;
+}
+
+.cap-card .panel-visual {
+  margin-top: 0;
 }
 
 .capability-pin {
@@ -1469,25 +1565,27 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
     justify-self: end;
   }
 
-  .capability-pin {
-    height: 560vh;
+  .product-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
   }
 
-  .capability-stage {
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 1.25rem;
-    align-items: center;
+  .product-left {
     position: sticky;
     top: var(--nav-h);
-    min-height: calc(100dvh - var(--nav-h));
-    padding-block: 1.25rem 2rem;
-    background: var(--bg);
-    z-index: 2;
+    height: calc(100dvh - var(--nav-h));
+    justify-content: space-between;
+    padding: 3.4rem 3.2rem 3.6rem 3.5rem;
   }
 
-  .capability-panel {
-    position: relative;
-    top: auto;
+  .product-right {
+    padding: 4.2rem 3.4rem 6rem 3.2rem;
+  }
+
+  .cap-card {
+    grid-template-columns: 1fr 1.05fr;
+    gap: 1.6rem 1.8rem;
+    align-items: start;
+    padding: 3.1rem 0;
   }
 
   .eco-grid {
@@ -1573,7 +1671,8 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
 
   .reveal,
   .hero-line,
-  .hero-fade {
+  .hero-fade,
+  .cap-card {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;

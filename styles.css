@@ -1228,15 +1228,6 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   fill: rgba(17, 17, 17, 0.52);
 }
 
-.hero-visual[data-state="listen"] .wai-flow-svg,
-.hero-visual[data-state="think"] .wai-flow-svg {
-  clip-path: inset(0 49% 0 0);
-}
-
-.hero-visual[data-state="respond"] .wai-flow-svg {
-  clip-path: inset(0 0 0 49%);
-}
-
 .wai-core {
   position: relative;
   z-index: 2;

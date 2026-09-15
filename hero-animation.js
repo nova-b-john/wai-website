@@ -5,12 +5,10 @@
 
   const visual = hero.querySelector(".hero-visual");
   const inPath = hero.querySelector(".wai-flow-in textPath");
-  const outPath = hero.querySelector(".wai-flow-out textPath");
   const inText = hero.querySelector(".wai-flow-in");
-  const outText = hero.querySelector(".wai-flow-out");
   const bars = [...hero.querySelectorAll(".wai-wave span")];
   const actB = hero.querySelector('.wai-act[data-act="b"]');
-  if (!visual || !inPath || !outPath || !bars.length) return;
+  if (!visual || !inPath || !bars.length) return;
 
   const phases = bars.map((_, i) => ({
     a: 0.35 + i * 0.37,
@@ -57,31 +55,16 @@
   }
 
   function tick(now) {
-    const { name, t } = at(now);
+    const { name, t, elapsed } = at(now);
     setState(name);
 
-    if (name === "listen") {
-      inPath.setAttribute("startOffset", `${lerp(-8, 28, easeInOut(t))}%`);
-      inText.style.opacity = t > 0.88 ? String(1 - (t - 0.88) / 0.12) : "1";
-      outText.style.opacity = "0";
-      actB?.classList.remove("is-on");
-    } else if (name === "think") {
-      inPath.setAttribute("startOffset", `${lerp(28, 46, easeInOut(t))}%`);
-      inText.style.opacity = String(1 - easeInOut(t));
-      outText.style.opacity = "0";
-      actB?.classList.remove("is-on");
-    } else if (name === "act") {
-      inText.style.opacity = "0";
-      outText.style.opacity = "0";
-      if (t > 0.38) actB?.classList.add("is-on");
-    } else {
-      inText.style.opacity = "0";
-      actB?.classList.remove("is-on");
-      outPath.setAttribute("startOffset", `${lerp(52, 108, easeInOut(t))}%`);
-      const fadeIn = clamp(t / 0.16, 0, 1);
-      const fadeOut = t > 0.78 ? 1 - (t - 0.78) / 0.22 : 1;
-      outText.style.opacity = String(fadeIn * fadeOut);
-    }
+    const passMs = 4200;
+    const pass = clamp(elapsed / passMs, 0, 1);
+    inPath.setAttribute("startOffset", `${lerp(-24, 124, pass)}%`);
+    inText.style.opacity = pass >= 1 ? "0" : "1";
+
+    if (name === "act" && t > 0.38) actB?.classList.add("is-on");
+    else actB?.classList.remove("is-on");
 
     const amp = waveAmp(name, t);
     const clock = now / 1000;

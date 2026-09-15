@@ -1228,6 +1228,18 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   fill: rgba(17, 17, 17, 0.52);
 }
 
+.hero-visual[data-flow="in"] .wai-flow-svg {
+  clip-path: inset(0 49% 0 0);
+}
+
+.hero-visual[data-flow="hold"] .wai-flow-svg {
+  opacity: 0;
+}
+
+.hero-visual[data-flow="out"] .wai-flow-svg {
+  clip-path: inset(0 0 0 49%);
+}
+
 .wai-core {
   position: relative;
   z-index: 2;
@@ -1509,6 +1521,20 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
     justify-self: end;
   }
 
+  .hero-glow {
+    left: 34%;
+  }
+
+  .wai-avatar {
+    margin-left: 2.4rem;
+    margin-right: auto;
+  }
+
+  .wai-core {
+    margin-left: 5.025rem;
+    margin-right: auto;
+  }
+
   .hero-chip-a {
     left: auto;
     right: 0;
@@ -1516,7 +1542,10 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .hero-chip-b {
+    left: auto;
     right: 0;
+    bottom: 12%;
+    width: max-content;
   }
 
   .capability-pin {

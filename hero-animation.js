@@ -58,10 +58,26 @@
     const { name, t, elapsed } = at(now);
     setState(name);
 
-    const passMs = 4200;
-    const pass = clamp(elapsed / passMs, 0, 1);
-    inPath.setAttribute("startOffset", `${lerp(-24, 124, pass)}%`);
-    inText.style.opacity = pass >= 1 ? "0" : "1";
+    const inMs = 2200;
+    const holdMs = 2000;
+    const outMs = 2200;
+    let flow = "idle";
+    let offset = 124;
+
+    if (elapsed < inMs) {
+      flow = "in";
+      offset = lerp(-24, 38, elapsed / inMs);
+    } else if (elapsed < inMs + holdMs) {
+      flow = "hold";
+      offset = 38;
+    } else if (elapsed < inMs + holdMs + outMs) {
+      flow = "out";
+      offset = lerp(58, 124, (elapsed - inMs - holdMs) / outMs);
+    }
+
+    if (visual.dataset.flow !== flow) visual.dataset.flow = flow;
+    inPath.setAttribute("startOffset", `${offset}%`);
+    inText.style.opacity = flow === "idle" || flow === "hold" ? "0" : "1";
 
     if (name === "act" && t > 0.38) actB?.classList.add("is-on");
     else actB?.classList.remove("is-on");

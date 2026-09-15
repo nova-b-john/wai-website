@@ -379,7 +379,7 @@ h3 {
 
 .hero-copy {
   position: relative;
-  z-index: 4;
+  z-index: 5;
   max-width: 52rem;
   margin-inline: auto;
 }
@@ -1501,7 +1501,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .hero-chip-a {
-    left: -1.5rem;
+    left: 0;
   }
 
   .hero-chip-b {
@@ -1557,7 +1557,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .hero-chip-a {
-    left: -6.75rem;
+    left: 0;
   }
 
   .hero-chip-b {

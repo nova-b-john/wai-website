@@ -1578,19 +1578,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .hero-chip-a {
-    left: auto;
-    right: -2.75rem;
     top: -1.1rem;
-  }
-
-  .hero-chip-b {
-    right: -3.25rem;
-  }
-}
-
-@media (min-width: 1360px) {
-  .hero-chip-b {
-    right: -5.5rem;
   }
 }
 

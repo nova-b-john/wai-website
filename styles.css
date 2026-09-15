@@ -1474,10 +1474,10 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .hero-inner {
-    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 1.05fr);
     align-items: center;
     justify-items: stretch;
-    gap: 1.5rem 4.75rem;
+    gap: 1.5rem 6.5rem;
     text-align: left;
   }
 
@@ -1495,13 +1495,13 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .hero-visual {
-    width: min(100%, 42rem);
+    width: min(100%, 44rem);
     margin: 0;
     justify-self: end;
   }
 
   .hero-chip-a {
-    left: 0;
+    left: -1.5rem;
   }
 
   .hero-chip-b {
@@ -1548,6 +1548,26 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
 
   .section {
     padding: var(--space-9) 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-inner {
+    gap: 1.5rem 8.25rem;
+  }
+
+  .hero-chip-a {
+    left: -6.75rem;
+  }
+
+  .hero-chip-b {
+    right: -3.25rem;
+  }
+}
+
+@media (min-width: 1360px) {
+  .hero-chip-b {
+    right: -5.5rem;
   }
 }
 

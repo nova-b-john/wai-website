@@ -1,14 +1,14 @@
 (function initWaiHeroAnimation() {
   const root = document.querySelector(".wai-hero-anim");
-  if (!root) return;
+  const hero = document.querySelector(".hero");
+  if (!root || !hero) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const inPath = root.querySelector(".wai-flow-in textPath");
   const outPath = root.querySelector(".wai-flow-out textPath");
   const outText = root.querySelector(".wai-flow-out");
-  const bars = [...root.querySelectorAll(".wai-wave span")];
-  const actB = root.querySelector('.wai-act[data-act="b"]');
-  const hero = document.querySelector(".hero");
+  const bars = [...hero.querySelectorAll(".wai-wave span")];
+  const actB = hero.querySelector('.wai-act[data-act="b"]');
   if (!inPath || !outPath || !bars.length) return;
 
   const phases = bars.map((_, i) => ({
@@ -18,10 +18,10 @@
   }));
 
   const timeline = [
-    { name: "listen", ms: 5600 },
-    { name: "think", ms: 2400 },
-    { name: "act", ms: 3200 },
-    { name: "respond", ms: 5000 },
+    { name: "listen", ms: 3800 },
+    { name: "think", ms: 1800 },
+    { name: "act", ms: 2600 },
+    { name: "respond", ms: 2200 },
   ];
 
   const total = timeline.reduce((sum, step) => sum + step.ms, 0);
@@ -53,7 +53,7 @@
     if (state === "listen") return lerp(0.72, 1, 0.5 + 0.5 * Math.sin(t * Math.PI));
     if (state === "think") return lerp(0.85, 0.22, easeInOut(t));
     if (state === "act") return 0.28 + 0.08 * Math.sin(t * Math.PI);
-    return lerp(0.3, 0.9, easeInOut(t));
+    return lerp(0.3, 0.95, easeInOut(t));
   }
 
   function tick(now) {
@@ -66,12 +66,12 @@
     setState(name);
 
     if (name === "listen") {
-      inPath.setAttribute("startOffset", `${lerp(-8, 22, easeInOut(t))}%`);
-      inPath.parentElement.style.opacity = t > 0.92 ? String(1 - (t - 0.92) / 0.08) : "1";
+      inPath.setAttribute("startOffset", `${lerp(-6, 18, easeInOut(t))}%`);
+      inPath.parentElement.style.opacity = t > 0.9 ? String(1 - (t - 0.9) / 0.1) : "1";
       outText.style.opacity = "0";
       actB.classList.remove("is-on");
     } else if (name === "think") {
-      inPath.setAttribute("startOffset", `${lerp(38, 46, easeInOut(t))}%`);
+      inPath.setAttribute("startOffset", `${lerp(18, 42, easeInOut(t))}%`);
       inPath.parentElement.style.opacity = String(1 - easeInOut(t));
       outText.style.opacity = "0";
       actB.classList.remove("is-on");
@@ -82,9 +82,9 @@
     } else {
       inPath.parentElement.style.opacity = "0";
       actB.classList.remove("is-on");
-      outPath.setAttribute("startOffset", `${lerp(44, 108, easeInOut(t))}%`);
-      const fadeIn = clamp(t / 0.12, 0, 1);
-      const fadeOut = t > 0.82 ? 1 - (t - 0.82) / 0.18 : 1;
+      outPath.setAttribute("startOffset", `${lerp(38, 96, easeInOut(t))}%`);
+      const fadeIn = clamp(t / 0.14, 0, 1);
+      const fadeOut = t > 0.78 ? 1 - (t - 0.78) / 0.22 : 1;
       outText.style.opacity = String(fadeIn * fadeOut);
     }
 
@@ -110,7 +110,7 @@
 
   document.addEventListener("visibilitychange", onVisibility);
 
-  if (hero && "IntersectionObserver" in window) {
+  if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
       (entries) => {
         running = entries.some((entry) => entry.isIntersecting) && !document.hidden;

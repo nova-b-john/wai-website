@@ -55,29 +55,15 @@
   }
 
   function tick(now) {
-    const { name, t, elapsed } = at(now);
+    const { name, t } = at(now);
     setState(name);
 
-    const inMs = 2200;
-    const holdMs = 2000;
-    const outMs = 2200;
-    let flow = "idle";
-    let offset = 124;
-
-    if (elapsed < inMs) {
-      flow = "in";
-      offset = lerp(-24, 38, elapsed / inMs);
-    } else if (elapsed < inMs + holdMs) {
-      flow = "hold";
-      offset = 38;
-    } else if (elapsed < inMs + holdMs + outMs) {
-      flow = "out";
-      offset = lerp(58, 124, (elapsed - inMs - holdMs) / outMs);
-    }
-
-    if (visual.dataset.flow !== flow) visual.dataset.flow = flow;
-    inPath.setAttribute("startOffset", `${offset}%`);
-    inText.style.opacity = flow === "idle" || flow === "hold" ? "0" : "1";
+    // Continuous ribbon scroll, Wispr-style: text keeps drifting along the curve.
+    const loopMs = 14000;
+    const progress = ((now - startedAt) % loopMs) / loopMs;
+    inPath.setAttribute("startOffset", `${lerp(-55, 105, progress)}%`);
+    inText.style.opacity = "1";
+    visual.dataset.flow = "stream";
 
     if (name === "act" && t > 0.38) actB?.classList.add("is-on");
     else actB?.classList.remove("is-on");

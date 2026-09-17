@@ -5,10 +5,12 @@
 
   const visual = hero.querySelector(".hero-visual");
   const inPath = hero.querySelector(".wai-flow-in textPath");
+  const outPath = hero.querySelector(".wai-flow-out textPath");
   const inText = hero.querySelector(".wai-flow-in");
+  const outText = hero.querySelector(".wai-flow-out");
   const bars = [...hero.querySelectorAll(".wai-wave span")];
   const actB = hero.querySelector('.wai-act[data-act="b"]');
-  if (!visual || !inPath || !bars.length) return;
+  if (!visual || !inPath || !outPath || !bars.length) return;
 
   const phases = bars.map((_, i) => ({
     a: 0.35 + i * 0.37,
@@ -17,10 +19,10 @@
   }));
 
   const timeline = [
-    { name: "listen", ms: 3800 },
-    { name: "think", ms: 1800 },
-    { name: "act", ms: 2600 },
-    { name: "respond", ms: 2200 },
+    { name: "listen", ms: 3200 },
+    { name: "think", ms: 2000 },
+    { name: "act", ms: 2200 },
+    { name: "respond", ms: 2800 },
   ];
 
   const total = timeline.reduce((sum, step) => sum + step.ms, 0);
@@ -58,15 +60,28 @@
     const { name, t } = at(now);
     setState(name);
 
-    // Continuous ribbon scroll, Wispr-style: text keeps drifting along the curve.
-    const loopMs = 14000;
-    const progress = ((now - startedAt) % loopMs) / loopMs;
-    inPath.setAttribute("startOffset", `${lerp(-55, 105, progress)}%`);
-    inText.style.opacity = "1";
-    visual.dataset.flow = "stream";
-
-    if (name === "act" && t > 0.38) actB?.classList.add("is-on");
-    else actB?.classList.remove("is-on");
+    // Question enters from the left, holds, then answer exits on the right.
+    if (name === "listen") {
+      visual.dataset.flow = "ask";
+      inPath.setAttribute("startOffset", `${lerp(-18, 28, easeInOut(t))}%`);
+      inText.style.opacity = t > 0.9 ? String(1 - (t - 0.9) / 0.1) : "1";
+      outText.style.opacity = "0";
+      actB?.classList.remove("is-on");
+    } else if (name === "think" || name === "act") {
+      visual.dataset.flow = "hold";
+      inText.style.opacity = "0";
+      outText.style.opacity = "0";
+      if (name === "act" && t > 0.38) actB?.classList.add("is-on");
+      else actB?.classList.remove("is-on");
+    } else {
+      visual.dataset.flow = "answer";
+      actB?.classList.remove("is-on");
+      inText.style.opacity = "0";
+      outPath.setAttribute("startOffset", `${lerp(52, 108, easeInOut(t))}%`);
+      const fadeIn = clamp(t / 0.14, 0, 1);
+      const fadeOut = t > 0.82 ? 1 - (t - 0.82) / 0.18 : 1;
+      outText.style.opacity = String(fadeIn * fadeOut);
+    }
 
     const amp = waveAmp(name, t);
     const clock = now / 1000;

@@ -361,7 +361,7 @@ h3 {
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 3rem 0 1.5rem;
+  padding: 2rem 0;
 }
 
 .first-frame {
@@ -391,6 +391,7 @@ h3 {
   position: relative;
   z-index: 3;
   display: grid;
+  align-items: center;
   gap: 1.5rem;
   justify-items: center;
   text-align: center;
@@ -1574,7 +1575,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
   }
 
   .hero {
-    padding: 5rem 0 2.5rem;
+    padding: 2rem 0;
   }
 
   .hero-inner {

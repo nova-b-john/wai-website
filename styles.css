@@ -1604,6 +1604,7 @@ html.js .hero.is-ready .hero-actions { animation-delay: 0.44s; }
     width: min(100%, 44rem);
     margin: 0;
     justify-self: end;
+    transform: translateY(-9px);
   }
 
   .product-split {
